@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->date('published')->nullable();
             $table->string('car_number');
             $table->text('description');
-            $table->string('status_report');
             $table->timestamps();
         });
     }

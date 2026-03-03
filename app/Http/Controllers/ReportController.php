@@ -17,24 +17,20 @@ class ReportController extends Controller
     }
     public function store(Request $request, Report $report){
         $data = $request -> validate([
-            'published' => 'date',
-            'car_number' => 'string',
-            'description' => 'string',
-            'status_report' => 'string',
+            'car_number' => 'string|required',
+            'description' => 'string|required',
         ]);
 
         $report->create($data);
         return redirect()->back();
     }
     public function edit(Report $report){
-        return view('report.show', compact('report'));
+        return view('report.edit', compact('report'));
     }
     public function update(Request $request, Report $report){
         $data = $request -> validate([
-            'published' => 'date',
-            'car_number' => 'string',
-            'description' => 'string',
-            'status_report' => 'string',
+            'car_number' => 'string|required',
+            'description' => 'string|required',
         ]);
 
         $report->update($data);
