@@ -11,6 +11,5 @@
     --color-red-500: oklch(0.72 0.11 178);
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-neutral-700: oklch(37.1% 0 0);
-    @custom-variant dark (&:where(.dark, .dark *));
     
 }

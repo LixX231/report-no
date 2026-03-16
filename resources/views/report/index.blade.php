@@ -17,6 +17,24 @@
     <main class="flex-1 bg-blue-100 dark:bg-neutral-800">
         <div class="container mx-auto">
             <a class="mt-10 ml-4 mb-4 inline-block px-6 py-2 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-400 rounded-full hover:bg-red-600 hover:text-white transition" href="{{route('reports.create')}}">Создать заявление</a>
+            <div class="container mx-auto">
+                <span class="ml-8 mr-8 mb-8">Сортировка по дате создания:</span>
+                <a class="ml-8 mr-8 mb-8" href="{{route('report.index', ['sort' => 'desc'])}}">Сначала новые</a>
+                <a class="ml-8 mr-8 mb-8" href="{{route('report.index', ['sort' => 'asc'])}}">Сначала старые</a>
+            </div>
+
+            <div>
+                <p>Фильтрация по статусу заявки</p>
+                <ul>
+                    @foreach ($statuses as $status)
+                        <li>
+                            <a href="{{route('report.index', ['status' => $status->id])}}">
+                                {{$status->name}}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($reports as $report)
@@ -24,6 +42,7 @@
                     <p class="text-red-700 dark:text-red-400 ml-8 mr-8 mt-4">{{ $report->created_at }}</p><br>
                     <h2 class="font-bold ml-8 mr-8 dark:text-white">{{ $report->car_number }}</h2><br>
                     <p class="ml-8 mr-8 dark:text-gray-300">{{ $report->description }}</p><br>
+                    <p class="ml-8 mr-8 mb-8">Статус: {{$report->status->name}}</p>
                     <form action="{{route('reports.destroy', $report->id)}}" method="POST" class="ml-8 mb-3 mr-8 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-full hover:bg-blue-600 hover:text-white transition">
                         @method('delete')
                         @csrf
@@ -32,6 +51,7 @@
                     <a href="{{ route('reports.edit', $report->id) }}" class="mb-8 ml-8 mr-8 inline-block px-6 py-2 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-400 rounded-full hover:bg-red-600 hover:text-white transition">Редактировать</a>
                 </div>
                 @endforeach
+                {{$reports->links()}}
             </div>
         </div>
     </main>
