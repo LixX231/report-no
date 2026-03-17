@@ -14,7 +14,7 @@
             <span class="text-blue-700 dark:text-blue-400">НАРУШЕНИЙ</span><span class="text-red-700 dark:text-red-400">.НЕТ</span>
         </a>
     </header>
-    <main class="flex-1 bg-blue-100 dark:bg-neutral-800">
+    <x-app-layout class="flex-1 bg-blue-100 dark:bg-neutral-800">
         <div class="container mx-auto">
             <a class="mt-10 ml-4 mb-4 inline-block px-6 py-2 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-400 rounded-full hover:bg-red-600 hover:text-white transition" href="{{route('reports.create')}}">Создать заявление</a>
             <div class="mx-auto">
@@ -51,10 +51,11 @@
                     <a href="{{ route('reports.edit', $report->id) }}" class="mb-8 ml-8 mr-8 inline-block px-6 py-2 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-400 rounded-full hover:bg-red-600 hover:text-white transition">Редактировать</a>
                 </div>
                 @endforeach
-                {{$reports->appends(request()->query())->links()}}
+                
             </div>
+            {{$reports->appends(request()->query())->links()}}
         </div>
-    </main>
+    </x-app-layout>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
             <span class="text-blue-700">НАРУШЕНИЙ</span><span class="text-red-700">.НЕТ</span>
         </a>
     </header>
-    <main class="flex-1 bg-blue-100 dark:bg-neutral-800 ">
+    <x-app-layout class="flex-1 bg-blue-100 dark:bg-neutral-800 ">
         <div class="container mx-auto flex flex-row flex-wrap px-4">
             <form action="{{ route('reports.store') }}" method="POST" class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4">
                 @csrf
@@ -21,6 +21,6 @@
                 <input type="submit" value="Создать" class="inline-block px-6 py-2 border-2 border-red-600 text-red-600 rounded-full hover:bg-red-600 hover:text-white transition dark:text-red-400 dark:border-red-400">
             </form>
         </div>
-    </main>
+    </x-app-layout>
 </body>
 </html>

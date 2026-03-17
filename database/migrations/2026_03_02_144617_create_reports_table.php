@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('car_number');
             $table->text('description');
             $table->string('status_id');
+            $table->string('user_id');
             $table->timestamps();
         });
     }
