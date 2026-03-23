@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\Admin;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Faker\Guesser\Name;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode;
@@ -27,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('/reports/{report}/edit', [ReportController::class, 'edit'])->name('reports.edit');
     Route::put('/reports/{report}', [ReportController::class, 'update'])->name('reports.update');
+});
+
+Route::middleware((Admin::class))->group(function(){
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });
 
 require __DIR__ . '/auth.php';
