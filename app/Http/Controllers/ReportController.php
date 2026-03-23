@@ -45,16 +45,16 @@ class ReportController extends Controller
     }
     public function store(Request $request, Report $report)
     {
-            $data = $request->validate([
-                'car_number' => 'string|required',
-                'description' => 'string|required',
-            ]);
+        $data = $request->validate([
+            'car_number' => 'string|required',
+            'description' => 'string|required',
+        ]);
 
-            $data['user_id'] = Auth::user()->id;
-            $data['status_id'] = 1;
+        $data['user_id'] = Auth::user()->id;
+        $data['status_id'] = 1;
 
-            $report->create($data);
-            return redirect()->back();
+        $report->create($data);
+        return redirect()->back();
     }
     public function edit(Report $report)
     {
@@ -77,6 +77,20 @@ class ReportController extends Controller
 
 
         $report->update($data);
+        return redirect()->back();
+    }
+
+    public function statusUpdate(Request $request, Report $report)
+    {
+        if ($report->status_id != 1) {
+            abort(403, 'У вас нет прав на редактирование статуса этой заявки.');
+        }
+
+        $request->validate([
+            'status_id' => 'required|in:2,3'
+        ]);
+
+        $report->update($request->only(['status_id']));
         return redirect()->back();
     }
 }
