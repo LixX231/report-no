@@ -36,6 +36,8 @@
                             @endforeach
                     </select>
                 </form>
+                @else
+                <p>{{$report->status->name}}</p>
                 @endif
             </div>
         </div>

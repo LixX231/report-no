@@ -82,15 +82,15 @@ class ReportController extends Controller
 
     public function statusUpdate(Request $request, Report $report)
     {
-        if ($report->status_id != 1) {
+        if ($report->status_id == 1) {
+            $request->validate([
+                'status_id' => 'required|in:2,3'
+            ]);
+
+            $report->update($request->only(['status_id']));
+            return redirect()->back();
+        }else{
             abort(403, 'У вас нет прав на редактирование статуса этой заявки.');
         }
-
-        $request->validate([
-            'status_id' => 'required|in:2,3'
-        ]);
-
-        $report->update($request->only(['status_id']));
-        return redirect()->back();
     }
 }
