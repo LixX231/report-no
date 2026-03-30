@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('report.index')" :active="request()->routeIs('dashboard')">
                         Список заявлений
                     </x-nav-link>
+                    <x-nav-link :href="route('reports.create')" :active="request()->routeIs('dashboard')">
+                        Создание заявлений
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -75,6 +78,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('report.index')" :active="request()->routeIs('dashboard')">
                 Список заявлений
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reports.create')" :active="request()->routeIs('dashboard')">
+                Создание заявлений
             </x-responsive-nav-link>
         </div>
 
