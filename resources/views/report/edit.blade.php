@@ -7,11 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen">
-    <header class="flex justify-center mt-4 mb-5 min-h-[10vh] bg-white dark:bg-neutral-700">
-        <a href="{{ route('report.index') }}">
-            <span class="text-blue-700">НАРУШЕНИЙ</span><span class="text-red-700">.НЕТ</span>
-        </a>
-    </header>
     <x-app-layout class="flex-1 bg-blue-100 md:flex-row sm:flex-col items-center dark:bg-neutral-800">
         <div class="container mx-auto flex flex-row flex-wrap px-4">
             <form action="{{ route('reports.update', $report->id) }}" method="POST" class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4">

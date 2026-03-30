@@ -9,34 +9,58 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <header class="flex justify-center mt-4 mb-5 min-h-[10vh] bg-white dark:bg-neutral-700">
-        <a href="{{ route('report.index') }}">
-            <span class="text-blue-700 dark:text-blue-400">НАРУШЕНИЙ</span><span class="text-red-700 dark:text-red-400">.НЕТ</span>
-        </a>
-    </header>
     <x-app-layout class="flex-1 bg-blue-100 dark:bg-neutral-800">
-        <x-filter :sort=$sort :status=$status></x-filter>
+        
+        <x-filter :sort=$sort :status=$status class="px-4 sm:px-6 lg:px-8"></x-filter>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8 lg:mt-12">
+                
                 @foreach ($reports as $report)
-                <div class="border mb-4 mr-10 ml-4 mt-4 bg-white dark:bg-neutral-700 rounded-2xl">
-                    <p class="text-red-700 dark:text-red-400 ml-8 mr-8 mt-4">{{\Carbon\Carbon::parse($report->created_at)->translatedFormat('j F Y h:i');}}</p><br>
-                    <h2 class="font-bold ml-8 mr-8 dark:text-white">{{ $report->car_number }}</h2><br>
-                    <p class="ml-8 mr-8 dark:text-gray-300">{{ $report->description }}</p><br>
-                    <x-status :type="$report->status->id">
-                        {{$report->status->name}}
-                    </x-status>
-                    <form action="{{route('reports.destroy', $report->id)}}" method="POST" class="ml-8 mb-3 mr-8 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-full hover:bg-blue-600 hover:text-white transition">
-                        @method('delete')
-                        @csrf
-                        <input type="submit" value="Удалить"><br>
-                    </form>
-                    <a href="{{ route('reports.edit', $report->id) }}" class="mb-8 ml-8 mr-8 inline-block px-6 py-2 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-400 rounded-full hover:bg-red-600 hover:text-white transition">Редактировать</a>
+                <div class="grid grid-rows-[auto_1fr_auto] border bg-white dark:bg-neutral-700 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200">
+                    
+                    <div class="px-4 sm:px-6 pt-4 sm:pt-6">
+                        <p class="text-red-700 dark:text-red-400 text-xs sm:text-sm">
+                            {{ \Carbon\Carbon::parse($report->created_at)->translatedFormat('j F Y H:i') }}
+                        </p>
+                        <h2 class="font-bold text-base sm:text-lg mt-2 dark:text-white">
+                            {{ $report->car_number }}
+                        </h2>
+                        <p class="text-sm sm:text-base mt-2 dark:text-gray-300 leading-relaxed">
+                            {{ $report->description }}
+                        </p>
+                    </div>
+                    
+                    <div class="px-4 sm:px-6">
+                        <x-status :type="$report->status->id">
+                            {{ $report->status->name }}
+                        </x-status>
+                    </div>
+                    
+                    <div class="px-4 sm:px-6 pb-4 sm:pb-6 mt-4 grid grid-cols-2 gap-3">
+                        <form action="{{ route('reports.destroy', $report->id) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <input type="submit" 
+                                   value="Удалить" 
+                                   class="w-full px-4 py-2 text-sm border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-full hover:bg-blue-600 hover:text-white transition cursor-pointer text-center">
+                        </form>
+                        
+                        <a href="{{ route('reports.edit', $report->id) }}" 
+                           class="w-full px-4 py-2 text-sm border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-400 rounded-full hover:bg-red-600 hover:text-white transition text-center">
+                            Редактировать
+                        </a>
+                    </div>
                 </div>
                 @endforeach
-                
+
             </div>
-            {{$reports->appends(request()->query())->links()}}
+            
+            <div class="px-4 sm:px-6 py-6 sm:py-8 grid place-items-center">
+                {{ $reports->appends(request()->query())->links() }}
+            </div>
+            
         </div>
     </x-app-layout>
 </body>
