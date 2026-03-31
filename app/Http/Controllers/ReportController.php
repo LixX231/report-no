@@ -54,7 +54,7 @@ class ReportController extends Controller
         $data['status_id'] = 1;
 
         $report->create($data);
-        return redirect()->back();
+        return redirect()->route('dashboard')->with('info', 'Заявление отправлено');
     }
     public function edit(Report $report)
     {

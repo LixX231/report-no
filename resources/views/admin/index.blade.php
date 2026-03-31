@@ -10,7 +10,7 @@
 
 <body>
     <x-app-layout>
-        <h1>Административная панель</h1>
+        <h1 class="ml-4">Административная панель</h1>
         <div class="flex p-2">
             <div class="w-1/4 p-2">ФИО</div>
             <div class="w-1/4 p-2">Текст заявления</div>
@@ -28,7 +28,7 @@
                 <form class="status-form" action="{{route('reports.status.update', $report->id)}}" method="POST">
                     @method('patch')
                     @csrf
-                    <select name="status_id" id="status_id">
+                    <select class="hover:border-b-red-400" name="status_id" id="status_id">
                             @foreach($statuses as $status)
                             <option value="{{$status->id}}" {{$status->id == $report->status_id ? 'selected' : ''}}>
                                 {{$status->name}}

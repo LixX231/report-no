@@ -11,6 +11,7 @@
         <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
             <div class="grid place-items-center">
                 <form action="{{ route('reports.store') }}" method="POST" class="w-full max-w-lg bg-white dark:bg-neutral-700 rounded-2xl shadow-sm p-6 sm:p-8">
+                    @include('layouts.flash-messages')
                     @csrf
                     
                     <label for="car_number" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Номер автомобиля</label>

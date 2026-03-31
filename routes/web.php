@@ -9,7 +9,11 @@ use Faker\Guesser\Name;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
+});
+
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::get('/dashboard', function () {

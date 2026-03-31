@@ -18,6 +18,13 @@
                     <x-nav-link :href="route('reports.create')" :active="request()->routeIs('dashboard')">
                         Создание заявлений
                     </x-nav-link>
+                    @if(Auth::check() && auth()->user()->isAdmin())
+
+                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
+                        Административная панель
+                    </x-nav-link>
+
+                    @endif
                 </div>
             </div>
 
@@ -43,7 +50,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-neutral-tertiary rounded-full">
+                            <div class="inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-neutral-tertiary rounded-full shrink-0">
                                 <span class="font-medium text-body">{{ Str::substr(Auth::user()->name, 0, 1) }}</span>
                             </div>
                             {{ __('Profile') }}
@@ -78,15 +85,19 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('report.index')" :active="request()->routeIs('dashboard')">
                 Список заявлений
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('reports.create')" :active="request()->routeIs('dashboard')">
                 Создание заявлений
             </x-responsive-nav-link>
+            @if(Auth::check() && auth()->user()->isAdmin())
+
+            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('dashboard')">
+                Административная панель
+            </x-responsive-nav-link>
+
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

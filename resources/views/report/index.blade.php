@@ -9,7 +9,7 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <x-app-layout class="flex-1 bg-blue-100 dark:bg-neutral-800">
+    <x-app-layout class="mx-auto bg-blue-100 dark:bg-neutral-800">
         
         <x-filter :sort=$sort :status=$status class="px-4 sm:px-6 lg:px-8"></x-filter>
 
