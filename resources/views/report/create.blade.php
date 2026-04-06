@@ -10,7 +10,7 @@
     <x-app-layout class="flex-1 bg-blue-100 dark:bg-neutral-800">
         <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
             <div class="grid place-items-center">
-                <form action="{{ route('reports.store') }}" method="POST" class="w-full max-w-lg bg-white dark:bg-neutral-700 rounded-2xl shadow-sm p-6 sm:p-8">
+                <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-lg bg-white dark:bg-neutral-700 rounded-2xl shadow-sm p-6 sm:p-8">
                     @include('layouts.flash-messages')
                     @csrf
                     
@@ -19,11 +19,16 @@
                     
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Описание нарушения</label>
                     <textarea name="description" id="description" rows="5" placeholder="Опишите детали нарушения" required class="w-full px-4 py-3 border-2 border-blue-400 rounded-lg mb-6 dark:text-neutral-100 dark:border-blue-400 dark:bg-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    
+
+                    <div>
+                        <x-input-label for="path_img" :value="__('Номер автомобиля')" />
+                        <x-text-input id="path_img" class="w-full sm:w-auto px-6 py-3 border-2 mb-4 mt-4 border-red-600 text-red-600 rounded-full hover:bg-red-600 hover:text-white transition dark:text-red-400 dark:border-red-400 cursor-pointer" type="file" name="path_img" required/>
+                        <x-input-error :messages="$errors->get('path_img')" class="mt-2"/>
+                    </div>
                     <input type="submit" value="Создать" class="w-full sm:w-auto px-6 py-3 border-2 border-red-600 text-red-600 rounded-full hover:bg-red-600 hover:text-white transition dark:text-red-400 dark:border-red-400 cursor-pointer">
                 </form>
             </div>
         </div>
-    </x-app-layout>
-</body>
+    </x-app-layout> 
+</body>     
 </html>

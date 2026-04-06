@@ -21,6 +21,9 @@
                 <div class="grid grid-rows-[auto_1fr_auto] border bg-white dark:bg-neutral-700 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200">
                     
                     <div class="px-4 sm:px-6 pt-4 sm:pt-6">
+                        @isset($report->path_img)
+                            <img src="{{ Storage::url($report->path_img) }}" class="contact-block__img" alt="">
+                        @endisset
                         <p class="text-red-700 dark:text-red-400 text-xs sm:text-sm">
                             {{ \Carbon\Carbon::parse($report->created_at)->translatedFormat('j F Y H:i') }}
                         </p>

@@ -6,6 +6,9 @@ use App\Models\Report;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+use function Pest\Laravel\put;
 
 class ReportController extends Controller
 {
@@ -48,10 +51,13 @@ class ReportController extends Controller
         $data = $request->validate([
             'car_number' => 'string|required',
             'description' => 'string|required',
+            'path_img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        $imageName = Storage::disk('public')->put('reports', $request->file('path_img'));
 
         $data['user_id'] = Auth::user()->id;
         $data['status_id'] = 1;
+        $data['path_img'] = $imageName;
 
         $report->create($data);
         return redirect()->route('dashboard')->with('info', 'Заявление отправлено');
